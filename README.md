@@ -1,7 +1,7 @@
 # 🛒 ShareWell - Membership-Based E-Commerce and OMS
 A full-stack order management system with XP tiers, equity rewards and admin tooling.
 
-##Overview
+## Overview
 Sharewell is a full-stack e-commerce platform modeled after Costco-style membership stores but enhanced with gamified progression, XP-based tiers, and fractional equity rewards.
 It features:
   * Customer shopping experience (browse → view → cart → checkout)
@@ -15,18 +15,18 @@ It features:
 
 This README serves as the technical report for the project, describing architecture, flows, roadblocks, and data models.
 
-##Architecture Overview
-###Frontend
+## Architecture Overview
+### Frontend
   * React and Vite
   * Context for Authentication and Cart
   * Pages for entire user and admin flow
   * Components for navigation, product cards and layout
-###Backend
+### Backend
   * Node.js and Express
   * REST API
   * Modular controllers and services
   * Logic (XP calculations, Tier logic, Equity accumulation)
-###Database
+### Database
   * PostgreSQL (on Supabase)
   * Tables include:
        * Customers
@@ -37,7 +37,7 @@ This README serves as the technical report for the project, describing architect
        * Equity_Records
        * Admin_Users
 
-##Project Structure
+## Project Structure
 ```
 sharewell/
   client/
@@ -100,15 +100,15 @@ sharewell/
         equityService.js
 ```
 
-###Roadblocks
-| Issues | Solutions |
-|---|---|---|
+### Roadblocks
+|Issues|Solutions|
+|---|---|
 | Cart and order logic required linking many tables | Implemented modular controllers and a unified checkout service | 
 | XP & tier progression required dynamic recalculation | Created xpService.js to compute XP and tier in one call | 
 | React image imports failing | Created a productImages.js registry that maps names to imports |
 
 
-###How to Run Locally
+### How to Run Locally
   * Install dependencies
     ```
     cd server && npm install
@@ -133,7 +133,7 @@ sharewell/
 Server runs at  ` http://localhost:3000 `
 Client runs at ` http://localhost:5173 `
 
-###Conclusion
+### Conclusion
 Sharewell demonstrates a full-stack e-commerce system with a complete Order Management System, real XP & equity reward logic, admin management capabilities, and clean React/Express/Postgres architecture.
 
 In future could include:
