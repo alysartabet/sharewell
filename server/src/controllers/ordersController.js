@@ -86,7 +86,7 @@ async function createOrder(req, res) {
       }
 
       // Apply membership discounts and tax here
-      const discount = 0; //plug membership discounts here later
+      const discount = 0; 
       const taxRate = 0.08875; // NYC-ish
       const tax = Math.round(subtotal * taxRate * 100) / 100;
       const total = subtotal - discount + tax;
@@ -116,7 +116,7 @@ async function createOrder(req, res) {
         `,
         [
           customerId,
-          "paid", // or 'pending' if you add a payment step
+          "paid", 
           subtotal,
           discount,
           tax,

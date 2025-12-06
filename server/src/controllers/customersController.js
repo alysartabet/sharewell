@@ -3,9 +3,21 @@ const db = require("../db");
 // GET /api/customers
 async function getAllCustomers(req, res) {
   try {
-    const result = await db.query(
-      "SELECT id, first_name, last_name, email, phone FROM customers ORDER BY id"
-    );
+     const result = await db.query(`
+      SELECT
+        c.id,
+        c.first_name,
+        c.last_name,
+        c.email,
+        c.phone,
+        c.xp_balance,
+        c.membership_tier_id,
+        mt.name AS membership_tier_name
+      FROM customers c
+      LEFT JOIN membership_tiers mt
+        ON c.membership_tier_id = mt.id
+      ORDER BY c.id
+    `);
     res.json(result.rows);
   } catch (err) {
     console.error("Error fetching customers:", err);
@@ -18,8 +30,22 @@ async function getCustomerById(req, res) {
   const { id } = req.params;
 
   try {
-    const result = await db.query(
-      "SELECT id, first_name, last_name, email, phone FROM customers WHERE id = $1",
+      const result = await db.query(
+      `
+      SELECT
+        c.id,
+        c.first_name,
+        c.last_name,
+        c.email,
+        c.phone,
+        c.xp_balance,
+        c.membership_tier_id,
+        mt.name AS membership_tier_name
+      FROM customers c
+      LEFT JOIN membership_tiers mt
+        ON c.membership_tier_id = mt.id
+      WHERE c.id = $1
+      `,
       [id]
     );
 

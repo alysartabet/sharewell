@@ -4,8 +4,6 @@ require("dotenv").config();
 //For Supabase
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  // If any SSL issues with Supabase:
-  // ssl: { rejectUnauthorized: false },
 });
 
 pool.on("error", (err) => {
@@ -17,7 +15,7 @@ function query(text, params) {
   return pool.query(text, params);
 }
 
-// Transaction helper used by ordersController + xpService + equityService
+// Transaction helper used by ordersController, xpService and equityService
 async function withTransaction(callback) {
   const client = await pool.connect();
   try {

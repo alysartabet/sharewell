@@ -1,6 +1,6 @@
 const db = require("../db");
 
-// Very simple rule: 1 XP per $1 of total order amount
+// 1 XP per $1 of total order amount
 const XP_PER_DOLLAR = 1;
 
 /**
@@ -75,6 +75,17 @@ async function awardXpForOrder(client, { customerId, orderId, orderTotalCents })
     // If membership_tiers table / logic is missing, silently ignore
     console.warn("Could not compute membership tier:", e.message);
   }
+
+   await client.query(
+    `
+    UPDATE customers
+    SET
+      xp_balance = $2,
+      membership_tier_id = $3
+    WHERE id = $1
+    `,
+    [customerId, xpBalance, currentTier ? currentTier.id : null]
+  );
 
   return {
     xp_transaction: xpTransaction,

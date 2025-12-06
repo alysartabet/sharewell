@@ -1,5 +1,3 @@
-/**Builds and exports the Express app */
-
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();

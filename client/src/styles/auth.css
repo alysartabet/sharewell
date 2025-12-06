@@ -1,0 +1,22 @@
+.login-page {
+  max-width: 40rem;
+}
+
+.login-page h1 {
+  margin-bottom: 0.75rem;
+}
+
+.login-page .card {
+  margin-top: 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.6rem;
+}
+
+.login-form button {
+  align-self: flex-start;
+}

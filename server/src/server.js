@@ -8,7 +8,7 @@ app.listen(PORT, () => {
 });
 
 
-/*If anything breaks I'll run:
+/*If anything breaks I'll run: UPDATE: I didnt break anything!!!
 node -v
 npm -v
 ls

@@ -6,16 +6,19 @@ async function getAllProducts(req, res) {
     const result = await db.query(
       `
       SELECT
-        id,
-        name,
-        description,
-        sku,
-        price,
-        inventory_qty,
-        is_active,
-        supplier_id
-      FROM products
-      ORDER BY id
+        p.id,
+        p.name,
+        p.description,
+        p.sku,
+        p.price,
+        p.inventory_qty,
+        p.is_active,
+        p.supplier_id,
+        s.name AS supplier_name
+      FROM products AS p
+      JOIN suppliers AS s
+        ON p.supplier_id = s.id
+      ORDER BY p.id;
       `
     );
 
@@ -37,16 +40,19 @@ async function getProductById(req, res) {
     const result = await db.query(
       `
       SELECT
-        id,
-        name,
-        description,
-        sku,
-        price,
-        inventory_qty,
-        is_active,
-        supplier_id
-      FROM products
-      WHERE id = $1
+        p.id,
+        p.name,
+        p.description,
+        p.sku,
+        p.price,
+        p.inventory_qty,
+        p.is_active,
+        p.supplier_id,
+        s.name AS supplier_name
+      FROM products AS p
+      JOIN suppliers AS s
+        ON p.supplier_id = s.id
+      WHERE p.id = $1
       `,
       [id]
     );
@@ -77,20 +83,23 @@ async function searchProducts(req, res) {
     const result = await db.query(
       `
       SELECT
-        id,
-        name,
-        description,
-        sku,
-        price,
-        inventory_qty,
-        is_active,
-        supplier_id
-      FROM products
+        p.id,
+        p.name,
+        p.description,
+        p.sku,
+        p.price,
+        p.inventory_qty,
+        p.is_active,
+        p.supplier_id,
+        s.name AS supplier_name
+      FROM products AS p
+      JOIN suppliers AS s
+        ON p.supplier_id = s.id
       WHERE
-        name ILIKE '%' || $1 || '%'
-        OR description ILIKE '%' || $1 || '%'
-        OR sku ILIKE '%' || $1 || '%'
-      ORDER BY name
+        p.name ILIKE '%' || $1 || '%'
+        OR p.description ILIKE '%' || $1 || '%'
+        OR p.sku ILIKE '%' || $1 || '%'
+      ORDER BY p.name
       `,
       [q]
     );

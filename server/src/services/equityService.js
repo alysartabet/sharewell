@@ -1,8 +1,7 @@
-// server/src/services/equityService.js
 const db = require("../db");
 
-// Example rule: 0.01 equity units per $1 spent
-const EQUITY_PER_DOLLAR = 0.01;
+// 0.001 equity units per $1 spent
+const EQUITY_PER_DOLLAR = 0.001;
 
 /**
  * Award equity units for an order.
